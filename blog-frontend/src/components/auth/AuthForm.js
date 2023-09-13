@@ -64,7 +64,7 @@ const AuthForm = () => {
       placeholder="비밀번호"
       type="password"
       />
-      <ButtonWithMarginTop>로그인</ButtonWithMarginTop>
+      <ButtonWithMarginTop cyan fullWidth>로그인</ButtonWithMarginTop>
       {/* 1.style props에 직접 전달하기  */}
           {/* <Button cyan fullWidth style={{marginTop:'1rem'}}>로그인</Button> */}
           {/* <Button cyan fullWidth >로그인</Button> */}
