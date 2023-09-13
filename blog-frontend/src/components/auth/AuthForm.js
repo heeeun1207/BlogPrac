@@ -1,13 +1,9 @@
-import styled from "styled-components";
-import {Link} from "react-router-dom";
-import palette from "../../lib/styles/palette";
-import Button from "../common/Button";
+import styled, { css } from 'styled-components';
+import palette from '../../lib/styles/palette';
+import Button from '../common/Button';
+import { Link } from 'react-router-dom';
 
-/**
- *회원가입 또는 로그인 폼을 보여준다.
- */
-
-  const AuthFormBlock = styled.div`
+const AuthFormBlock = styled.div`
   h3 {
     margin: 0;
     color: ${palette.gray[8]};
@@ -15,28 +11,22 @@ import Button from "../common/Button";
   }
 `;
 
-
-/**
- * 스타일링된 input
- */
 const StyledInput = styled.input`
   font-size: 1rem;
   border: none;
   border-bottom: 1px solid ${palette.gray[5]};
-  padding-bottom: 0%.5rem;
+  padding-bottom: 0.5rem; 
   outline: none;
   width: 100%;
   &:focus {
-    color: $oc-teal-7;
+    color: ${palette.gray[7]}; 
     border-bottom: 1px solid ${palette.gray[7]};
   }
   & + & {
     margin-top: 1rem;
   }
 `;
-/**
- * 폼 하단에 로그인 혹은 회원가입 링크 보여주기 
- */
+
 const Footer = styled.div`
   margin-top: 2rem;
   text-align: right;
@@ -48,29 +38,47 @@ const Footer = styled.div`
     }
   }
 `;
-//2 styled 함수로 새로운 컴포넌트 이름으로 정의해서 스타일주기 
+
 const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
 `;
-const AuthForm = () => {
+
+const textMap = {
+  login: '로그인',
+  register: '회원가입',
+};
+
+const AuthForm = ({ type }) => {
+  const text = textMap[type];
   return (
     <AuthFormBlock>
-      <h3>로그인</h3>
+      <h3>{text}</h3>
       <form>
-      <StyledInput autoComplete="username" name="username" placeholder="아이디" />  
-      <StyledInput
-      autoComplete="new-password"
-      name="password"
-      placeholder="비밀번호"
-      type="password"
-      />
-      <ButtonWithMarginTop cyan fullWidth>로그인</ButtonWithMarginTop>
-      {/* 1.style props에 직접 전달하기  */}
-          {/* <Button cyan fullWidth style={{marginTop:'1rem'}}>로그인</Button> */}
-          {/* <Button cyan fullWidth >로그인</Button> */}
+        <StyledInput autoComplete="username" name="username" placeholder="아이디" />
+        <StyledInput
+          autoComplete="new-password"
+          name="password"
+          placeholder="비밀번호"
+          type="password" 
+        />
+        {type === 'register' && ( 
+          <StyledInput
+            autoComplete="new-password"
+            name="passwordConfirm"
+            placeholder="비밀번호 확인"
+            type="password" 
+          />
+        )}
+        <ButtonWithMarginTop cyan isFullWidth>
+          {text}
+        </ButtonWithMarginTop>
       </form>
       <Footer>
-        <Link to="/resgister">회원가입</Link>
+        {type === 'login' ? (
+          <Link to="/register">회원가입</Link> 
+        ) : (
+          <Link to="/login">로그인</Link>
+        )}
       </Footer>
     </AuthFormBlock>
   );
