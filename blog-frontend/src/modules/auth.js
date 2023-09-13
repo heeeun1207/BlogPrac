@@ -1,14 +1,40 @@
 import { createAction, handleActions } from "redux-actions";
-//리듀서 틀 만들기 
-const SAMPLE_ACTION = 'auth/SAMPLE_ACTION'
+import { produce } from 'immer'; // 변경된 부분? 
+// immer의 최신 버전에서는 기본 내보내기 대신 명명된 내보내기(named export)를 사용한다.
 
-export const sampleAction = createAction(SAMPLE_ACTION);
+const CHANGE_FIELD = 'auth/CHANGE_FIELD';
+const INITIALIZE_FORM ='auth/INITIALIZE_FORM';
 
-const initialState = {};
+export const changeField = createAction( CHANGE_FIELD,
+({ form, key, value }) => ({
+  form, //register , login
+  key, // username , password , passwordConfirm
+  value, // 실제 바꾸려는 값
+}),
+);
+export const initializeForm = createAction(INITIALIZE_FORM, form=> form);// register /login
+
+const initialState = {
+  register : {
+    username: '',
+    password: '',
+    passwordConfirm:'',
+  },
+  login:{
+    username:'',
+    password:'',
+  },
+};
 
 const auth = handleActions(
   {
-    [SAMPLE_ACTION]: (state, action) => state,
+    [CHANGE_FIELD]: (state, { payload: {form ,key, value}}) => produce (state, draft=> {
+      draft[form][key] = value; // 예: state.register.username 을 바꾼다 
+    }),
+    [INITIALIZE_FORM] : (state, {payload : form})=> ({
+      ...state,
+      [form]: initialState[form],
+    }),
   },
   initialState,
 );

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Button from '../common/Button';
 import { Link } from 'react-router-dom';
@@ -15,11 +15,11 @@ const StyledInput = styled.input`
   font-size: 1rem;
   border: none;
   border-bottom: 1px solid ${palette.gray[5]};
-  padding-bottom: 0.5rem; 
+  padding-bottom: 0.5rem; /* 수정: 오타 수정 */
   outline: none;
   width: 100%;
   &:focus {
-    color: ${palette.gray[7]}; 
+    color: ${palette.gray[7]}; /* 수정: 변수 오타 수정 */
     border-bottom: 1px solid ${palette.gray[7]};
   }
   & + & {
