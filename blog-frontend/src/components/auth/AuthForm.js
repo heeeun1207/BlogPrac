@@ -7,12 +7,12 @@ import Button from "../common/Button";
  *회원가입 또는 로그인 폼을 보여준다.
  */
 
- const AuthFormBlock = styled.div`
- h3 {
-   margin: 0;
-   color: ${palette.gray[8]};
-   margin-bottom: 1rem;
- }
+  const AuthFormBlock = styled.div`
+  h3 {
+    margin: 0;
+    color: ${palette.gray[8]};
+    margin-bottom: 1rem;
+  }
 `;
 
 
@@ -48,7 +48,10 @@ const Footer = styled.div`
     }
   }
 `;
-
+//2 styled 함수로 새로운 컴포넌트 이름으로 정의해서 스타일주기 
+const ButtonWithMarginTop = styled(Button)`
+  margin-top: 1rem;
+`;
 const AuthForm = () => {
   return (
     <AuthFormBlock>
@@ -61,8 +64,10 @@ const AuthForm = () => {
       placeholder="비밀번호"
       type="password"
       />
-
-          <Button>로그인</Button>
+      <ButtonWithMarginTop>로그인</ButtonWithMarginTop>
+      {/* 1.style props에 직접 전달하기  */}
+          {/* <Button cyan fullWidth style={{marginTop:'1rem'}}>로그인</Button> */}
+          {/* <Button cyan fullWidth >로그인</Button> */}
       </form>
       <Footer>
         <Link to="/resgister">회원가입</Link>
