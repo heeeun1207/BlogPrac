@@ -6,10 +6,10 @@ import styled from "styled-components";
 
 const AuthTemplateBlock = styled.div``;
 
-const AuthTemplate = () => {
+const AuthTemplate = ({children}) => {
   return (
     <AuthTemplateBlock>
-
+      {children}
     </AuthTemplateBlock>
   );
 };
